@@ -1,0 +1,69 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta charset = "utf-8">
+	<title>Track Tweet /{{ user }}</title>
+	<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico">
+	<link rel="stylesheet" href= '{{ STATIC_URL }}css/normalize.css'>
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css">
+	<link rel="stylesheet" href='{{ STATIC_URL }}css/estiloNinja.css'>
+	<script src='{{ STATIC_URL }}js/jquery.min.js'></script>
+	<script src='{{ STATIC_URL }}js/prefixfree.min.js'></script>
+	<script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js" ></script>
+	<script src='{{ STATIC_URL }}js/codigoNinja.js'></script>
+</head>
+<body>
+
+	<header>
+		<h1>Track Tweet</h1>
+		<div id="perfil">
+			<nav>
+				<ul>
+					<li><a href="#">Inicio</a></li>
+					<li><a href="/about">Sobre el Proyecto</a></li>
+					<li id="user">
+						{{ user }}
+						<img src='{{ profile_photo }}' />
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<section id='menu'>
+		
+		<a href="#" >
+			<div id='adduser'>+Add</div>
+		</a>
+		<hr/>
+
+		<div id='newTweets'></div>
+
+		<div id="tweets">
+		{% for tweet in tweets %}	
+			{% if tweet.geo %}
+				<article class="tweet-geo" data-geo="{{ tweet.geo.coordinates }}">
+			{% else %}
+				<article class="tweet" >
+			{% endif %}
+				<a href="https://twitter.com/{{ tweet.user.screen_name }}">
+					<img src=" {{ tweet.user.profile_image_url }} " />  
+				</a>
+				<p>
+					<strong>
+					{{ tweet.user.name }}
+					
+					</strong>
+					<a href="https://twitter.com/{{ tweet.user.screen_name }}">@{{ tweet.user.screen_name }}</a>
+					<br/>
+					{{ tweet.text |urlize }}
+				</p>
+			</article>
+		{% endfor %}
+		</div>
+	</section>
+
+	<section id='map'></section>
+
+</body>
+</html>

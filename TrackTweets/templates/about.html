@@ -1,0 +1,45 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta charset = "utf-8">
+	<title>TrackTweet</title>
+	<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico">
+	<link rel="stylesheet" href= '{{ STATIC_URL }}css/normalize.css'>
+	<link rel="stylesheet" href='{{ STATIC_URL }}css/estiloNinja.css'>
+<link rel="stylesheet" href='{{ STATIC_URL }}css/about.css'>	
+</head>
+<body>
+	<header>
+		<h1>Track Tweet</h1>
+		<div id="perfil">
+			<nav>
+				<ul>
+					<li><a href="#">Inicio</a></li>
+					<li><a href="/about">Sobre el Proyecto</a></li>
+					<li id="user">
+				{# {{ user }} #}
+						<span>dadasdassdj</span>
+						<img src='/static/img/carlos.png' />
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<section>
+		<h2>La iniciativa</h2>
+		<p>Tracktweet es una iniciativa personal, un proyecto para descubrir, aprender y experimentar. 
+			<a href="https://twitter.com/calosth">@calosth</a> es el autor y con este experimento busca poner el primer proyecto en la web.
+			Esta hecho por supuesto utilizan el <a href="https://dev.twitter.com/docs/api/1.1">API REST de Twitter</a>, los mapas son de <a href="http://leafletjs.com/">Leaflet</a> , esta hecho  
+			en <a href="https://www.djangoproject.com/">Django</a> y <a href="https://github.com/ryanmcgrath/twython">Twython</a> una versatil libreria para conectar con el API de Twitter. Ademas jQuery, y el API
+			de localicación de Google para obtener los tweets geoposicionados 
+
+		</p>
+		<hr>
+		<h2>Creditos</h2>
+		<hr>
+		<h2>Licencia</h2>
+
+	</section>
+
+</body>
+</html>
