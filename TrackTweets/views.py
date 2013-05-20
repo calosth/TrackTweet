@@ -29,7 +29,7 @@ def home(request):
 
 def twitter(request):
 	t = Twython(app_key, app_secret)
-	auth_props = t.get_authentication_tokens(callback_url='http://localhost:8000/done')
+	auth_props = t.get_authentication_tokens(callback_url='secret-refuge-1434.herokuapp.com/done')
 	oauth_token = auth_props['oauth_token']
 	oauth_token_secret = auth_props['oauth_token_secret']
 	return HttpResponseRedirect(auth_props['auth_url'])
