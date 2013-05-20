@@ -12,8 +12,7 @@ urlpatterns = patterns('',
     url(r'^about$', 'TrackTweets.views.about', name='about'),
     url(r'^get_tweets$', 'TrackTweets.views.get_tweets', name='get_tweets'),
 
-    # url(r'^TweetMap/', include('TweetMap.foo.urls')),
-	url(r'', include('social_auth.urls')),
+    # url(r'^TrackTweet/', include('TrackTweet.foo.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

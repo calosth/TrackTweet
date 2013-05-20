@@ -1,5 +1,7 @@
 # Django settings for TrackTweet project.
 
+
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 # Identificando la ruta del proyecto
@@ -125,7 +127,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'TrackTweets',    
-    'social_auth',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -161,7 +162,13 @@ LOGGING = {
     }
 }
 
-AUTHENTICATION_BACKENDS = ('social_auth.backends.twitter.TwitterBackend','django.contrib.auth.backends.ModelBackend',)
 TWITTER_CONSUMER_KEY              = 'qTbX3pLnOwI5vEJ08YDzw'
 TWITTER_CONSUMER_SECRET           = 'LG4qyLc9Z3N2UjFEyNzqMigFyTN7Az29qLEoCA8EQk'
 LOGIN_REDIRECT_URL = '/'
+
+#Configuracion con Heruku
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
