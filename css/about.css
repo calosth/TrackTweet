@@ -1,0 +1,13 @@
+body
+{
+	background: #fcfcfc;
+}
+section{
+	letter-spacing: 0.1em;	
+	margin: 3em auto;
+	width: 80%;
+}
+section a{
+	color: #1a90d4;
+	text-decoration: underline;
+}
