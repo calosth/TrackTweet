@@ -1,3 +1,6 @@
+
+var listaMarkers = [];
+
 function onDocumentReady() {
     
     var map = L.map('map', {
@@ -9,21 +12,36 @@ function onDocumentReady() {
 	map.addLayer(tiles);
 
 	//Funcion que recibe un tweet y lo pone en el mapa
-	function MarcarTweet(longi , latit){
+	function MarcarTweet(longi , latit , author , tweet , id ){
+
 		var markerTweet = L.marker([longi, latit]);
-		map.addLayer(markerTweet)
-		markerTweet.bindPopup(" sda");
+
+		var tweetmarker = {
+			marker: markerTweet,
+			tweet: id
+		}
+
+		listaMarkers.push(tweetmarker);
+		
+		map.addLayer(markerTweet);
+		markerTweet.bindPopup( author + " <br/>" + tweet);
 	}
 	
 	// Request cada 60 segundos
 	setInterval( RequestAjax, 60000);
-	// $('#adduser').on('click',RequestAjax);
+
+
 
 
 	// Geoposicionar Tweets sincronos 
-	$('.tweet-geo').each(posicionarTweets);
+	$('.tweet-geo').each(posicionarTweetsPrimerRequest);
 
-	function posicionarTweets(){
+	//desplezar menu
+	$('user').on('click', function(){
+		$('menuUser').slideToggle('slow');
+	});
+
+	function posicionarTweetsPrimerRequest(){
 		var datos = $(this).attr('data-geo');
 		var latitud = '';
 		var posicion ;
@@ -42,12 +60,15 @@ function onDocumentReady() {
 			}				
 			longitud += datos[i];
 		}
+		MarcarTweet(parseInt(latitud), parseInt(longitud), $(this).text() , '' , parseInt($(this).data('id') ));		
 
-		console.log( parseFloat(latitud) +' '+ parseFloat(longitud) );
-		MarcarTweet(parseInt(latitud), parseInt(longitud));		
 	}
+
+	$('.tweet-geo').on('click', MoveraMarker);
+	
 	var Listatweets = [];
 	var titleOriginal = document.title;
+
 	function RequestAjax(data){
 		$.getJSON( '/get_tweets' , manejarRequet );
 
@@ -79,8 +100,12 @@ function onDocumentReady() {
 
 		function llenarLista(key,tweets){
 			Listatweets.push(tweets);
-			$('#newTweets').text(Listatweets.length + ' nuevos tweets');
-			// Cambiar el titulo de la pagina		
+			var mensaje = ' nuevos tweets';
+
+			if (Listatweets.length == 1)
+				mensaje = ' nuevo tweet';
+
+			$('#newTweets').text(Listatweets.length + mensaje);
 		}
 	}
 	function inyectarTweets(key,tweet){
@@ -91,12 +116,12 @@ function onDocumentReady() {
 			//Si tiene localizacion
 			if (tweet.geo != null){
 				//Cadena para inyetar tweet
-				article = '<article class="tweet-geo">';
+				article = '<article class="tweet-geo" data-id= '+ tweet.id +'>';
 
 				tweet.coordinates.coordinates[0]; // Longitud
 				tweet.coordinates.coordinates[1]; // Latitude
 				//La verdad es que no se cual es cual
-				MarcarTweet(tweet.coordinates.coordinates[1],tweet.coordinates.coordinates[0]);
+				MarcarTweet(tweet.coordinates.coordinates[1],tweet.coordinates.coordinates[0] , tweet.user.screen_name , tweet.text, parseInt(tweet.id));
 			}
 			else{
 				article = '<article class="tweet">';
@@ -107,7 +132,7 @@ function onDocumentReady() {
 					tweet.user.name+"</strong><a href='https://twitter.com/"+tweet.user.screen_name+"'>@"+ tweet.user.screen_name +"</a><br/>" +
 					tweet.text+"</p></article>";	
 			//inyectar tweet
-			$('#tweets').prepend(html);
+			$('#tweets').prepend(html).css({display: 'block'});
 
 			//deshabilitar newTweets
 			$('#newTweets').off('click');
@@ -115,10 +140,25 @@ function onDocumentReady() {
 				display: 'none'
 			}
 			$('#newTweets').css(cssAbrirNewTweets);		
-
 			Listatweets = [];	
 			document.title = titleOriginal;
+			$('.tweet-geo').on('click', MoveraMarker);
+
 	}	
+
+	function MoveraMarker(e){
+		var IdClick = $(this).data('id');
+		console.log(IdClick);
+		$.each(listaMarkers,function(){
+			if (this.tweet == IdClick){
+				console.log(this.marker._latlng);
+				map.panTo(this.marker._latlng );
+				map.setZoom(7);
+				this.marker.openPopup();
+			}
+		});
+
+	}
 
 }
 

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang='es'>
+	<head>
+		<meta charset = "utf-8">
+		<title>Track Tweet {% block titulo %} {%endblock%}</title>
+		<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico">
+		<link rel="stylesheet" href= '{{ STATIC_URL }}css/normalize.css'>
+		<link rel="stylesheet" href='{{ STATIC_URL }}css/estiloNinja.css'>
+		{% block links %}	
+
+		{% endblock %}
+	</head>
+	<body>
+		<header>
+			<h1>Track Tweet</h1>
+			<div id="perfil">
+				<nav>
+					<ul>
+						<li><a href="/">Inicio</a></li>
+						<li><a href="/about">Sobre el Proyecto</a></li>
+						{%block usuario%}
+
+						{%endblock%}
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		{%block contenido%}
+
+		{%endblock%}	
+
+	</body>
+</html>

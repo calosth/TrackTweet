@@ -11,12 +11,14 @@ urlpatterns = patterns('',
     url(r'^login$', 'TrackTweets.views.twitter', name='twitter'),
     url(r'^done$', 'TrackTweets.views.done', name='done'),
     url(r'^about$', 'TrackTweets.views.about', name='about'),
+    url(r'^search$', 'TrackTweets.views.search', name='search'),
     url(r'^get_tweets$', 'TrackTweets.views.get_tweets', name='get_tweets'),
+    url(r'^logout$', 'TrackTweets.views.logout', name='logout'),
 
     # url(r'^TrackTweet/', include('TrackTweet.foo.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^static/(?P.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    # url(r'^static/(?P.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 

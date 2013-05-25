@@ -4,6 +4,7 @@ body {
 	font-size: 16px;
 	font-family: Helvetica;
 	letter-spacing: 0.1em;	
+	min-height:  600px;
 }
 
 header {
@@ -19,7 +20,6 @@ header h1
 	font-weight: normal;
 	margin: 0 1.7em;
 	padding: 0.3em 0;
-	/*text-shadow: rgba(255,255,255,0.4) 0px 0px 7px;*/
 	width: 45%;
 
 }
@@ -28,10 +28,9 @@ h1, #perfil{
 	vertical-align: top;
 }
 #map {
-	height: 95%;
+	height: 100%;
 	position: absolute;
 	width: 70%;
-	/*Cambiar a 75*/
 }
 
 #map , #menu{
@@ -41,21 +40,36 @@ h1, #perfil{
 
 #menu{
 	background: #e6e6e6;
-	height: 95%;
-	overflow: scroll;
+	/*float: left;*/
+	overflow-x: hidden;
+	overflow-y: auto;
+	/*position: relative;*/
 	top: 40px;
 	width: 30%;
 }
 
+#menuUser{
+	background: #333;
+	display: none;
+	float: right;
+	padding-bottom: 0.5em;
+	padding-top: 0.5em;
+	position: absolute;
+	text-align: center;
+	top: 3em;
+	width: 109px;
+}
 #newTweets{
+	background: url('refreshIcon.png') no-repeat 4em;
 	background-color: #ffffff;
+	background-size: 1em 1em;
 	color:#b3b3b3;
 	cursor: pointer;
 	display: none;
 	margin: 0.5em;
 	padding: 0.7em;
 	text-align: center;
-	-webkit-transition: all 0.1s linear;
+	-webkit-transition: all 0.4s linear;
 }
 
 #adduser {
@@ -94,6 +108,7 @@ h1, #perfil{
 {
 	vertical-align: middle;
 	display: inline-block;
+	margin-top: 0.3em;
 	padding:  0 1em;
 }
 #perfil ul li a
@@ -112,17 +127,20 @@ h1, #perfil{
 {
 	color: #CCC;
 	margin: 0 0 0 10em;
-	/*text-align: left;*/
-	/*width: 50px;*/
+	text-align: left;
 }
 #perfil #user span
 {
-	/*margin-top: -2em;*/
+	margin-top: 0.9em;
+	display: inline-block;
+	vertical-align: top;
+
 }
+
 #perfil #user img
 {
 	border: #CCC solid 2px;
-	margin-top: 0.2em;
+	margin-top: 0.4em;
 	width: 1.8em;
 	/*position: fixed;*/
 }
@@ -153,6 +171,7 @@ h1, #perfil{
 	margin: 0.5em;
 	padding: 0.7em;
 	transition: all 0.4s linear;
+	cursor: pointer;
 
 }
 .tweet:hover
