@@ -1,6 +1,4 @@
 venv
 Imagenologia
-css
-img
-js
 *.pyc
+.DS_Store
