@@ -3,15 +3,15 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.models import User
 from twython import Twython, TwythonError
+import KeySecretApp
 import json
-app_key = '9N5k0ctbxMRsTOz5GAbAw'
-app_secret ='4hAWJlhDfDuOn7g4BqVXeQo2PbcLYABjpeIKTFYDrnU'
+
 oauth_token = ''
 oauth_token_secret =''
 ultimo_id = ''
 def home(request):
 	if 'oauth_token' in request.session:
-		t = Twython(app_key,app_secret,request.session["oauth_token"],request.session["oauth_token_secret"])
+		t = Twython(KeySecretApp.app_key,KeySecretApp.app_secret,request.session["oauth_token"],request.session["oauth_token_secret"])
 		
 		user = request.session["user"]
 
@@ -29,7 +29,7 @@ def home(request):
 
 
 def twitter(request):
-	t = Twython(app_key, app_secret)
+	t = Twython(KeySecretApp.app_key, KeySecretApp.app_secret)
 	auth_props = t.get_authentication_tokens(callback_url='http://localhost:8000/done')
 	oauth_token = auth_props['oauth_token']
 	oauth_token_secret = auth_props['oauth_token_secret']
@@ -40,7 +40,7 @@ def done(request):
 	
 	oauth_verifier =request.GET.get('oauth_verifier')
 	
-	twitter = Twython(app_key,app_secret,oauth_token,oauth_token_secret)
+	twitter = Twython(KeySecretApp.app_key,KeySecretApp.app_secret,oauth_token,oauth_token_secret)
 	
 	oauth_tokens = twitter.get_authorized_tokens(oauth_verifier)
 	
@@ -66,7 +66,7 @@ def about(request):
 # Hacer logeo
 def get_tweets(request):
 	if request.is_ajax():
-		t = Twython(app_key,app_secret,request.session["oauth_token"],request.session["oauth_token_secret"])
+		t = Twython(KeySecretApp.app_key,KeySecretApp.app_secret,request.session["oauth_token"],request.session["oauth_token_secret"])
 		home_timeline = t.get_home_timeline(since_id = request.session['ultimo_id']	)	
 		request.session['ultimo_id'] = int (home_timeline[0]['id'] -4)
 
@@ -84,7 +84,7 @@ def get_tweets(request):
 	
 def search(request):
 
-	# t = Twython(app_key,app_secret,request.session["oauth_token"],request.session["oauth_token_secret"])
+	# t = Twython(KeySecretApp.app_key,KeySecretApp.app_secret,request.session["oauth_token"],request.session["oauth_token_secret"])
 	
 	# search = t.search(q='hola', count = 100)
 
@@ -93,7 +93,7 @@ def search(request):
 	return render_to_response('search.html', context_instance=RequestContext(request))
 
 def logout(request):
-	del request.session
+	# del request.session =''
 	return HttpResponseRedirect('/')
 
 
