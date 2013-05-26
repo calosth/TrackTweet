@@ -84,16 +84,17 @@ def get_tweets(request):
 	
 def search(request):
 
-	# t = Twython(KeySecretApp.app_key,KeySecretApp.app_secret,request.session["oauth_token"],request.session["oauth_token_secret"])
-	
-	# search = t.search(q='hola', count = 100)
+	if request.method == 'GET':
+		t = Twython(KeySecretApp.app_key,KeySecretApp.app_secret,request.session["oauth_token"],request.session["oauth_token_secret"])
+		
+		search = t.search(q='hola', count = 100)
 
-	# search = search['statuses']
+		search = search['statuses']
 
 	return render_to_response('search.html', context_instance=RequestContext(request))
 
 def logout(request):
-	# del request.session =''
+	del request.session['oauth_token']
 	return HttpResponseRedirect('/')
 
 

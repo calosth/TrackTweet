@@ -14,20 +14,19 @@
 
 	{%block usuario%}
 		<li id="user">
-			<a href="">
+			<div >
 				<span>{{ user }}</span>
 				<img src='{{ profile_photo }}' />
 				<div id='menuUser'>
-					logout
+					<a href="/logout">logout</a>
 				</div>	 
 				</div>					
-			</a>
+			</div>
 		</li>
 	{%endblock%}
 
 	{%block contenido%}
-		<div id='menu'>
-			
+		<section id='menu'>			
 			<a href="#" >
 				{# <div id='adduser'>+Add</div> #}
 			</a>
@@ -52,12 +51,12 @@
 						</strong>
 						<a href="https://twitter.com/{{ tweet.user.screen_name }}">@{{ tweet.user.screen_name }}</a>
 						<br/>
-						{{ tweet.text | 	urlize }}
+						{{ tweet.text | urlize }}
 					</p>
 				</article>
 			{% endfor %}
 			</div>
-		</div>
+		</section>
 
 		<section id='map'></section>
 

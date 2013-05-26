@@ -37,8 +37,8 @@ function onDocumentReady() {
 	$('.tweet-geo').each(posicionarTweetsPrimerRequest);
 
 	//desplezar menu
-	$('user').on('click', function(){
-		$('menuUser').slideToggle('slow');
+	$('#user').on('click', function(){
+		$('#menuUser').slideToggle('slow');
 	});
 
 	function posicionarTweetsPrimerRequest(){
