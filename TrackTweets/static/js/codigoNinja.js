@@ -2,6 +2,8 @@
 var listaMarkers = [];
 
 function onDocumentReady() {
+
+	$('attr.timeago').timeago();
     
     var map = L.map('map', {
 	    center: [0, -23],
@@ -37,8 +39,8 @@ function onDocumentReady() {
 	$('.tweet-geo').each(posicionarTweetsPrimerRequest);
 
 	//desplezar menu
-	$('#user').on('click', function(){
-		$('#menuUser').slideToggle('slow');
+	$('#user').hoverIntent(function(){
+		$('#menuUser').slideToggle('fast');
 	});
 
 	function posicionarTweetsPrimerRequest(){
@@ -129,7 +131,8 @@ function onDocumentReady() {
 
 			var html = article +
 				"<a href='https://twitter.com/'"+ tweet.user.screem_name +"'><img src=" + tweet.user.profile_image_url +  " /></a><p><strong>"+
-					tweet.user.name+"</strong><a href='https://twitter.com/"+tweet.user.screen_name+"'>@"+ tweet.user.screen_name +"</a><br/>" +
+					tweet.user.name+"</strong><a href='https://twitter.com/"+tweet.user.screen_name+"'> @"+ tweet.user.screen_name +"</a><attr class='timeago' title='" + tweet.created_at + "'>" + tweet.created_at + "</attr>"+
+					"<br/>" +
 					tweet.text+"</p></article>";	
 			//inyectar tweet
 			$('#tweets').prepend(html).css({display: 'block'});
@@ -142,7 +145,9 @@ function onDocumentReady() {
 			$('#newTweets').css(cssAbrirNewTweets);		
 			Listatweets = [];	
 			document.title = titleOriginal;
+
 			$('.tweet-geo').on('click', MoveraMarker);
+			$('attr.timeago').timeago();
 
 	}	
 
@@ -165,5 +170,21 @@ function onDocumentReady() {
 
 $(document).on('ready', onDocumentReady);
 
+jQuery.timeago.settings.strings = {
 
+   prefixFromNow: "dentro de",
+   suffixAgo: "",
+   suffixFromNow: "",
+   seconds: " %d seg",
+   minute: "1 min",
+   minutes: "%d min",
+   hour: "1 h",
+   hours: "%d h",
+   day: "un día",
+   days: "%d días",
+   month: "un mes",
+   months: "%d meses",
+   year: "un año",
+   years: "%d años"
+};
 

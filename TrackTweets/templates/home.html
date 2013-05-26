@@ -7,6 +7,8 @@
 	{%block links%}
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css">
 		<script src='{{ STATIC_URL }}js/jquery.min.js'></script>
+		<script src='{{ STATIC_URL }}js/jquery.hoverIntent.js'></script>		
+		<script src='{{ STATIC_URL }}js/jquery.timeago.js' ></script>
 		<script src='{{ STATIC_URL }}js/prefixfree.min.js'></script>
 		<script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js" ></script>
 		<script src='{{ STATIC_URL }}js/codigoNinja.js'></script>
@@ -47,9 +49,9 @@
 					<p>
 						<strong>
 						{{ tweet.user.name }}
-						
 						</strong>
 						<a href="https://twitter.com/{{ tweet.user.screen_name }}">@{{ tweet.user.screen_name }}</a>
+						<attr class='timeago' title='{{ tweet.created_at }}'> {{ tweet.created_at }} </attr>
 						<br/>
 						{{ tweet.text | urlize }}
 					</p>
