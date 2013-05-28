@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+	
+	{%block titulo%}
+	/ {{ user }}
+	{%endblock%}
+
+	{%block links%}
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css">
+		<script src='{{ STATIC_URL }}js/jquery.min.js'></script>
+		<script src='{{ STATIC_URL }}js/jquery.hoverIntent.js'></script>		
+		<script src='{{ STATIC_URL }}js/jquery.timeago.js' ></script>
+		<script src='{{ STATIC_URL }}js/prefixfree.min.js'></script>
+		<script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js" ></script>
+		<script src='{{ STATIC_URL }}js/codigoNinja.js'></script>
+	{%endblock%}
+
+	{%block usuario%}
+		<li id="user">
+			<div >
+				<span>{{ user }}</span>
+				<img src='{{ profile_photo }}' />
+				<div id='menuUser'>
+					<a href="/logout">logout</a>
+				</div>	 
+				</div>					
+			</div>
+		</li>
+	{%endblock%}
+
+	{%block contenido%}
+		<section id='menu'>
+			<span>Resultados de <strong>{{ busqueda }}</strong></span>
+			<a href="#" >
+				{# <div id='adduser'>+Add</div> #}
+			</a>
+			<hr/>
+
+			<div id='newTweets'></div>
+
+			<div id="tweets">
+			{% for tweet in tweets %}	
+				{% if tweet.geo %}
+					<article class="tweet-geo" data-geo="{{ tweet.geo.coordinates }}" data-id= "{{ tweet.id }}">
+				{% else %}
+					<article class="tweet" >
+				{% endif %}
+					<a href="https://twitter.com/{{ tweet.user.screen_name }}">
+						<img src=" {{ tweet.user.profile_image_url }} " />  
+					</a>
+					<p>
+						<strong>
+						{{ tweet.user.name }}
+						</strong>
+						<a href="https://twitter.com/{{ tweet.user.screen_name }}">@{{ tweet.user.screen_name }}</a>
+						<attr class='timeago' title='{{ tweet.created_at }}'> {{ tweet.created_at }} </attr>
+						<br/>
+						{{ tweet.text | urlize }}
+					</p>
+				</article>
+			{% endfor %}
+			</div>
+		</section>
+
+		<section id='map'></section>
+
+	{%endblock%}

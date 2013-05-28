@@ -1,25 +1,26 @@
 from django.http import HttpResponseRedirect,HttpResponse
-from django.shortcuts import render_to_response 
+from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.contrib.auth.models import User
+from TrackTweets.forms import searchForm
 from twython import Twython, TwythonError
+
 import KeySecretApp
 import json
 
 oauth_token = ''
 oauth_token_secret =''
 ultimo_id = ''
+ 
 def home(request):
 	if 'oauth_token' in request.session:
 		t = Twython(KeySecretApp.app_key,KeySecretApp.app_secret,request.session["oauth_token"],request.session["oauth_token_secret"])
 		
 		user = request.session["user"]
 
-		JSONuser = t.show_user(screen_name = user)		
-		
-
-		profile_photo = JSONuser['profile_image_url_https']
-
+		JSONuser = t.show_user(screen_name = user)				
+		request.session["profile_photo"] = JSONuser['profile_image_url_https']
+		profile_photo =request.session["profile_photo"]
  		home_timeline = t.get_home_timeline()
  		request.session['ultimo_id'] = int (home_timeline[0]['id'] -4)
 
@@ -84,14 +85,26 @@ def get_tweets(request):
 	
 def search(request):
 
-	if request.method == 'GET':
-		t = Twython(KeySecretApp.app_key,KeySecretApp.app_secret,request.session["oauth_token"],request.session["oauth_token_secret"])
-		
-		search = t.search(q='hola', count = 100)
 
-		search = search['statuses']
+	if 'oauth_token' in request.session:
+		user = request.session["user"]
+		profile_photo = request.session["profile_photo"]
+		if request.method == 'POST':
+			palabra = request.POST.get('search','')
 
-	return render_to_response('search.html', context_instance=RequestContext(request))
+			t = Twython(KeySecretApp.app_key,KeySecretApp.app_secret,request.session["oauth_token"],request.session["oauth_token_secret"])
+
+			search = t.search(q=palabra, count = 100)
+			search = search['statuses']
+
+			return render_to_response('homeSearch.html',{'tweets':search,'profile_photo':profile_photo ,'user':user,'busqueda':palabra }, context_instance=RequestContext(request))		
+		else:
+			form = searchForm()
+
+		return render(request,'search.html', {'form': form, 'profile_photo':profile_photo ,'user':user},context_instance=RequestContext(request))
+
+	else:
+		return render_to_response('index.html',context_instance=RequestContext(request))		
 
 def logout(request):
 	del request.session['oauth_token']

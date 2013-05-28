@@ -2,13 +2,11 @@
 <html lang='es'>
 	<head>
 		<meta charset = "utf-8">
-		<title>Track Tweet {% block titulo %} {%endblock%}</title>
+		<title>Track Tweet </title>
 		<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico">
 		<link rel="stylesheet" href= '{{ STATIC_URL }}css/normalize.css'>
 		<link rel="stylesheet" href='{{ STATIC_URL }}css/estiloNinja.css'>
-		{% block links %}	
 
-		{% endblock %}
 	</head>
 	<body>
 		<header>
@@ -18,18 +16,22 @@
 					<ul>
 						<li><a href="/">Inicio</a></li>
 						<li><a href="/about">Sobre el Proyecto</a></li>
-						<li><a href="/search">Buscar</a></li>
-						{% block usuario %}
-
-						{% endblock %}
+						<li id="user">
+							<div >
+								<span>calosth</span>
+								<img src='{{ STATIC_URL }}img/carlos.png' />
+								<div id='menuUser'>
+									<a href="/logout">logout</a>
+								</div>	 
+								</div>					
+							</div>
+						</li>						
 					</ul>
 				</nav>
 			</div>
 		</header>
 
-		{%block contenido%}
 
-		{%endblock%}	
 
 	</body>
 </html>

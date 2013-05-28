@@ -91,9 +91,9 @@ function onDocumentReady() {
 				document.title ='('+ Listatweets.length + ') '+titleOriginal;
 				cssAbrirNewTweets ={
 					display: 'block'
-				}
+				};
 				$('#newTweets').css(cssAbrirNewTweets);
-
+				// $('#newTweets').slideToggle('slow');
 				//para iterar cada tweet
 				$('#newTweets').on('click',function(){$.each(Listatweets, inyectarTweets)});
 

@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^done$', 'TrackTweets.views.done', name='done'),
     url(r'^about$', 'TrackTweets.views.about', name='about'),
     url(r'^search$', 'TrackTweets.views.search', name='search'),
+    url(r'^search/(?P<search>\w+)', 'TrackTweets.views.search', name='search'),
     url(r'^get_tweets$', 'TrackTweets.views.get_tweets', name='get_tweets'),
     url(r'^logout$', 'TrackTweets.views.logout', name='logout'),
 

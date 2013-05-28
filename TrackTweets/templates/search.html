@@ -1,12 +1,45 @@
 {% extends 'base.html' %}
 
-{% block contenido%}
+	{% block links %}
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css">
+		<link rel="stylesheet" href='{{ STATIC_URL }}css/estiloSearch.css'>
+		<script src='{{ STATIC_URL }}js/jquery.min.js'></script>
+		<script src='{{ STATIC_URL }}js/jquery.hoverIntent.js'></script>		
+		<script src='{{ STATIC_URL }}js/jquery.timeago.js' ></script>
+		<script src='{{ STATIC_URL }}js/prefixfree.min.js'></script>
+		<script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js" ></script>
+		<script src='{{ STATIC_URL }}js/codigoNinja.js'></script>
 
-	<section id= 'buscar'>
-		<form type='GET'>
-			<input type='text' />
-			<button type = 'sumit'>Buscar</button>
-		</form>
-	</section>
+	{% endblock %}
 
-{% endblock %}
+	{%block usuario%}
+		<li id="user">
+			<div >
+				<span>{{ user }}</span>
+				<img src='{{ profile_photo }}' />
+				<div id='menuUser'>
+					<a href="/logout">logout</a>
+				</div>	 
+				</div>					
+			</div>
+		</li>
+	{%endblock%}
+
+	{% block contenido%}
+
+		<section id= 'buscar'>
+			<form method='post' action='/search'>
+				{%csrf_token%}
+				<input type='text' placeholder= "buscar" name='search'/>
+				<button type = 'sumit'></button>
+			</form>
+		</section>
+
+		<div id='blockmensajeSearch'>
+			<h3>Realiza busquedas de hashtags y usuarios</h3>
+		</div>
+		<div id='blockmensajeGeo'>			
+			<h3>Mira en el mapa desde dónde se hicieron los tweets</h3>
+		</div>
+
+	{% endblock %}
