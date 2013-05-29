@@ -43,14 +43,14 @@
 				{% else %}
 					<article class="tweet" >
 				{% endif %}
-					<a href="https://twitter.com/{{ tweet.user.screen_name }}">
+					<a href="https://twitter.com/{{ tweet.user.screen_name }}" target='_black'>
 						<img src=" {{ tweet.user.profile_image_url }} " />  
 					</a>
 					<p>
 						<strong>
 						{{ tweet.user.name }}
 						</strong>
-						<a href="https://twitter.com/{{ tweet.user.screen_name }}">@{{ tweet.user.screen_name }}</a>
+						<a href="https://twitter.com/{{ tweet.user.screen_name }}" target='_black'>@{{ tweet.user.screen_name }}</a>
 						<attr class='timeago' title='{{ tweet.created_at }}'> {{ tweet.created_at }} </attr>
 						<br/>
 						{{ tweet.text | urlize }}

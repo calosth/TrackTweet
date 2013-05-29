@@ -6,6 +6,7 @@
 
 	{%block links%}
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css">
+		<link rel="stylesheet" href='{{ STATIC_URL }}css/estiloSearch.css'>		
 		<script src='{{ STATIC_URL }}js/jquery.min.js'></script>
 		<script src='{{ STATIC_URL }}js/jquery.hoverIntent.js'></script>		
 		<script src='{{ STATIC_URL }}js/jquery.timeago.js' ></script>
@@ -29,10 +30,11 @@
 
 	{%block contenido%}
 		<section id='menu'>
-			<span>Resultados de <strong>{{ busqueda }}</strong></span>
-			<a href="#" >
-				{# <div id='adduser'>+Add</div> #}
-			</a>
+			<div id='boxresultadoBusqueda'>
+				<div id='resultadoBusqueda'>				
+					<span>Resultados de <strong>{{ busqueda }}</strong></span>
+				</div id='resultadoBusqueda'>			
+			</div>
 			<hr/>
 
 			<div id='newTweets'></div>
@@ -44,14 +46,14 @@
 				{% else %}
 					<article class="tweet" >
 				{% endif %}
-					<a href="https://twitter.com/{{ tweet.user.screen_name }}">
+					<a href="https://twitter.com/{{ tweet.user.screen_name }}" target='_black'>
 						<img src=" {{ tweet.user.profile_image_url }} " />  
 					</a>
 					<p>
 						<strong>
 						{{ tweet.user.name }}
 						</strong>
-						<a href="https://twitter.com/{{ tweet.user.screen_name }}">@{{ tweet.user.screen_name }}</a>
+						<a href="https://twitter.com/{{ tweet.user.screen_name }}" target='_black'>@{{ tweet.user.screen_name }}</a>
 						<attr class='timeago' title='{{ tweet.created_at }}'> {{ tweet.created_at }} </attr>
 						<br/>
 						{{ tweet.text | urlize }}

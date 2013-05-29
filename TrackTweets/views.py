@@ -89,9 +89,8 @@ def search(request):
 	if 'oauth_token' in request.session:
 		user = request.session["user"]
 		profile_photo = request.session["profile_photo"]
-		if request.method == 'POST':
-			palabra = request.POST.get('search','')
-
+		if request.GET.get('search'):
+			palabra = request.GET.get('search')
 			t = Twython(KeySecretApp.app_key,KeySecretApp.app_secret,request.session["oauth_token"],request.session["oauth_token_secret"])
 
 			search = t.search(q=palabra, count = 100)

@@ -28,8 +28,7 @@
 	{% block contenido%}
 
 		<section id= 'buscar'>
-			<form method='post' action='/search'>
-				{%csrf_token%}
+			<form method='get' action='/search'>
 				<input type='text' placeholder= "buscar" name='search'/>
 				<button type = 'sumit'></button>
 			</form>
