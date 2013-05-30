@@ -3,24 +3,8 @@
 	{% block links%}
 
 	<link rel="stylesheet" href='{{ STATIC_URL }}css/about.css'>	
-	<script src='{{ STATIC_URL }}js/jquery.min.js'></script>
-	<script src='{{ STATIC_URL }}js/jquery.hoverIntent.js'></script>		
-	<script src='{{ STATIC_URL }}js/main.js'></script>
 	
 	{% endblock %}
-
-	{%block usuario%}
-		<li id="user">
-			<div >
-				<span>{{ user }}</span>
-				<img src='{{ profile_photo }}' />
-				<div id='menuUser'>
-					<a href="/logout">logout</a>
-				</div>	 
-				</div>					
-			</div>
-		</li>
-	{%endblock%}
 
 	{% block contenido %}
 		<section>

@@ -62,7 +62,14 @@ def done(request):
 
 
 def about(request):
-	return render_to_response('about.html',context_instance=RequestContext(request))
+
+
+	if 'oauth_token' in request.session:
+		user = request.session["user"]
+		profile_photo = request.session["profile_photo"]
+		return render_to_response('about.html',{'user':user,'profile_photo':profile_photo},context_instance=RequestContext(request))
+	else:
+		return render_to_response('aboutAnonymous.html',context_instance=RequestContext(request))
 
 # Hacer logeo
 def get_tweets(request):
@@ -84,19 +91,22 @@ def get_tweets(request):
 	return HttpResponseRedirect('/')
 	
 def search(request):
-
-
 	if 'oauth_token' in request.session:
+
 		user = request.session["user"]
 		profile_photo = request.session["profile_photo"]
 		if request.GET.get('search'):
+
 			palabra = request.GET.get('search')
 			t = Twython(KeySecretApp.app_key,KeySecretApp.app_secret,request.session["oauth_token"],request.session["oauth_token_secret"])
 
-			search = t.search(q=palabra, count = 100)
+			search = t.search(q=palabra, count = 20)
 			search = search['statuses']
 
-			return render_to_response('homeSearch.html',{'tweets':search,'profile_photo':profile_photo ,'user':user,'busqueda':palabra }, context_instance=RequestContext(request))		
+			if request.is_ajax():
+					return HttpResponse(json.dumps({'timeline': search}),content_type = 'application/json; charset=utf8')
+			else:
+				return render_to_response('homeSearch.html',{'tweets':search,'profile_photo':profile_photo ,'user':user,'busqueda':palabra }, context_instance=RequestContext(request))		
 		else:
 			form = searchForm()
 
