@@ -95,17 +95,30 @@ def search(request):
 
 		user = request.session["user"]
 		profile_photo = request.session["profile_photo"]
+
 		if request.GET.get('search'):
 
 			palabra = request.GET.get('search')
 			t = Twython(KeySecretApp.app_key,KeySecretApp.app_secret,request.session["oauth_token"],request.session["oauth_token_secret"])
 
-			search = t.search(q=palabra, count = 20)
-			search = search['statuses']
-
 			if request.is_ajax():
-					return HttpResponse(json.dumps({'timeline': search}),content_type = 'application/json; charset=utf8')
+				
+				search = t.search( q=palabra, count = 20 , result_type = 'recent',since_id = request.session['ultimo_id'] )
+				search = search['statuses']
+		 		request.session['ultimo_id'] = int (search[0]['id'] -4)
+
+				#Validar si hay nuevos tweets
+				if len(search) > 1:
+					search.reverse()	
+					del search[0]
+				else:
+					search = ''
+
+				return HttpResponse(json.dumps({'timeline': search}),content_type = 'application/json; charset=utf8')
 			else:
+				search = t.search(q=palabra, count = 50 , result_type = 'recent')
+				search = search['statuses']
+		 		request.session['ultimo_id'] = int (search[0]['id'] -4)
 				return render_to_response('homeSearch.html',{'tweets':search,'profile_photo':profile_photo ,'user':user,'busqueda':palabra }, context_instance=RequestContext(request))		
 		else:
 			form = searchForm()
