@@ -1,5 +1,4 @@
 venv
-Imagenologia
 *.pyc
 .DS_Store
 TrackTweets/KeySecretApp.py
