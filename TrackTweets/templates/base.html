@@ -2,6 +2,7 @@
 <html lang='es'>
 	<head>
 		<meta charset = "utf-8">
+		<meta name="viewport" content="width=device-width , maximum-scale=1">
 		<title>TrackTweet {% block titulo %} {%endblock%}</title>
 		<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico">
 		<link rel="stylesheet" href= '{{ STATIC_URL }}css/normalize.css'>
@@ -25,6 +26,23 @@
 					</ul>
 				</nav>
 			</div>
+
+			
+			<div id='IconMenu-display'>
+
+			</div >
+
+			<div id= 'menu-display'>
+				<nav>
+					<ul>
+						<li><a href="/">Inicio</a></li>
+						<li><a href="/about">Sobre el Proyecto</a></li>
+						<li><a href="/search">Buscar</a></li>
+
+					</ul>
+				</nav>					
+			</div>
+
 		</header>
 
 		{%block contenido%}

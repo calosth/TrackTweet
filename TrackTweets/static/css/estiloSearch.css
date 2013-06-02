@@ -35,15 +35,14 @@ body {
 #buscar{
 	background: url("texture.png") repeat;
 	border-radius: 3px;
+	height: 8em;
 	margin: 6em auto;
-	padding: 3em;
-	width: 40em;
+	width: 50%;
 }
 
-#buscar form{
-	margin-right: auto;
-	margin-left: auto;
-	width: 50%;
+#formulario{
+	margin: 3em auto;
+	width: 45%;
 }
 
 #buscar input[type=text]{
@@ -52,6 +51,7 @@ body {
 	padding: 0.4em;
 	margin: 0;
 	letter-spacing: 0.1em;	
+	width: 10em;
 }
 
 #boxresultadoBusqueda{

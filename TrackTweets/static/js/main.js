@@ -8,4 +8,17 @@ function handlerDocumentReady(){
 		$('#menuUser').slideToggle('fast');
 	});
 
+
+	$('#IconMenu-display').on('click',handlerClickMenu);
+
+}
+function handlerClickMenu (e) {
+	css ={
+		display: 'inline-block',
+		heigth: 'auto'
+	}
+
+	$('#menu-display').slideToggle('fast');
+	// $('#menu-display').css(css);
+
 }
