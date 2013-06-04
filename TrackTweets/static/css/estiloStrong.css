@@ -3,6 +3,7 @@
 {
 	background: white;
 	background: url('background.png') repeat center center fixed;
+	/*background-size: 100% 100%;*/
 	min-height: 569px;
 }
 section a
@@ -22,7 +23,6 @@ section a
 	font-weight: normal;	
 	line-height: 1.3em;
 	text-shadow: #000 1px 1px 8px;
-	z-index: -1;
 }
 #singin
 {

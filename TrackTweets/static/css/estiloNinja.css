@@ -53,7 +53,7 @@ h1, #perfil{
 	z-index: 0;
 }
 
-#menuUser{
+.menuUser{
 	background: rgba(3,3,3,0.8);
 	display: none;
 	float: right;
@@ -68,9 +68,10 @@ h1, #perfil{
 #menu-display{
 	background: #333;
 	display: none;
+	height: 0px;
+	position: absolute;
 	text-align: center;
 	width: 0px;
-	height: 0px;
 	z-index: 2;
 }
 
@@ -86,6 +87,25 @@ h1, #perfil{
 #menu-display ul li{
 	padding-bottom: 0.4em;
 	text-decoration: none;
+}
+#menu-display #userMenu{
+	cursor: pointer;
+}
+#menu-display #userMenu span{
+	display: block;
+	font-size: 0.8em;	
+	color: #CCC;
+}
+
+#menu-display #userMenu :hover{
+	color: #0fb9ff;
+	text-decoration: none;
+	-webkit-transition: all 0.1s linear;
+}
+
+#menu-display #userMenu img{
+	border: white 1px solid;
+	width: 34px;
 }
 
 #IconMenu-display{
@@ -227,7 +247,7 @@ h1, #perfil{
 }
 .tweet a
 {
-	color:  #d1c24f;
+	color:  rgb(54, 159, 230);
 	text-decoration: none;
 }
 .tweet a:hover
@@ -300,6 +320,14 @@ h1, #perfil{
 
 	#menu-display nav{
 		display: block;
+	}
+
+	#menu-display .menuUser{
+		background: #333;
+		display: none;
+		position: absolute;
+		top: 8em;
+		width: 100%;
 	}
 
 
