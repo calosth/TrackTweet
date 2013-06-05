@@ -11,7 +11,7 @@ body {
 
 
 header {
-	background: url('iconheader.png') no-repeat left,#333;
+	background: url('images/iconheader.png') no-repeat left,#333;
 	background-size: 214px 38px ;
 	/*box-shadow: rgba(0,0,0,0.4) 0px 4px 10px;*/
 	height: 3em;
@@ -115,7 +115,7 @@ h1, #perfil{
 	cursor: pointer;
 }
 #newTweets{
-	background: url('refreshIcon.png') no-repeat 4em;
+	background: url('images/refreshIcon.png') no-repeat 4em;
 	background-color: #ffffff;
 	background-size: 1em 1em;
 	color:#b3b3b3;
@@ -128,7 +128,7 @@ h1, #perfil{
 }
 
 #adduser {
-	background: url("texture.png") repeat;
+	background: url("images/texture.png") repeat;
 	border-radius: 0.2em;
 	color: white;
 	margin: 1em 0.5em;
@@ -214,7 +214,7 @@ h1, #perfil{
 }
 .tweet-geo
 {
-	background:  url('MiniMarker.png') no-repeat right 10% top 15% ,#ffffff;
+	background:  url('images/MiniMarker.png') no-repeat right 10% top 15% ,#ffffff;
 	border-radius: 0.3em;
 	border: dashed 0.1em;
 	box-shadow: rgba(0,0,0,0.4) 0px 0px 10px;
@@ -257,7 +257,7 @@ h1, #perfil{
 
 .tweet-geo:hover
 {
-	background: url('MiniMarker.png') no-repeat right 10% top 15%,#b6b6b6;
+	background: url('images/MiniMarker.png') no-repeat right 10% top 15%,#b6b6b6;
 }
 .tweet-geo img{
 	width: 3.8em;
