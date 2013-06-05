@@ -31,7 +31,7 @@ def home(request):
 def twitter(request):
 
 	twitter 			= Twython( KeySecretApp.app_key, KeySecretApp.app_secret )
-	auth_props 			= twitter.get_authentication_tokens( callback_url='http://localhost:8000/done' )
+	auth_props 			= twitter.get_authentication_tokens( callback_url='http://tracktweet.herokuapp.com/done' )
 	oauth_token 		= auth_props['oauth_token']
 	oauth_token_secret 	= auth_props['oauth_token_secret']
 
