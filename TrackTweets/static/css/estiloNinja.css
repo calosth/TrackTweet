@@ -34,7 +34,7 @@ h1, #perfil{
 #map {
 	height: 92%;
 	max-height: 570px;
-	position: absolute;
+	position: fixed;
 	width: 70%;
 	z-index: 0;
 }
