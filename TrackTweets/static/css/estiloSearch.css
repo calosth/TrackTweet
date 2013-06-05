@@ -1,5 +1,6 @@
 body {
-	background: url('images/idax.png') repeat center center fixed;
+	background: url('images/idax.jpg') repeat center center;
+
 }
 
 #blockmensajeSearch{
@@ -94,8 +95,18 @@ body {
 }
 
 @media screen and (max-width: 664px){
+	body {
+		background-color: #333333;
+		background-repeat: no-repeat;
+		background-position: top;
+		background-size: 110%;
+	}	
 
 	#blockmensajeSearch, #blockmensajeGeo{	
 		width: 90%;
+	}
+	#buscar #formulario{
+		padding-left: 1.5em;
+		padding-right: 1.5em;
 	}
 }

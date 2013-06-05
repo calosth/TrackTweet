@@ -39,12 +39,12 @@ h1, #perfil{
 	z-index: 0;
 }
 
-#map , #menu{
+#map , #timeline{
 	display: inline-block;
 	vertical-align: top;
 }
 
-#menu{
+#timeline{
 	background: #e6e6e6;
 	overflow: scroll;
 	top: 40px;
