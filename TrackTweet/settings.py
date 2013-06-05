@@ -167,7 +167,7 @@ TWITTER_CONSUMER_KEY              = 'qTbX3pLnOwI5vEJ08YDzw'
 TWITTER_CONSUMER_SECRET           = 'LG4qyLc9Z3N2UjFEyNzqMigFyTN7Az29qLEoCA8EQk'
 LOGIN_REDIRECT_URL = '/'
 
-Configuracion con Heruku
+# Configuracion con Heruku
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
 
