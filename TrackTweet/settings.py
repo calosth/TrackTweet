@@ -2,7 +2,7 @@
 
 
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 # Identificando la ruta del proyecto
 import os
