@@ -32,7 +32,7 @@ h1, #perfil{
 	height: 100%;
 }
 #map {
-	height: 92%;
+	height: 93%;
 	max-height: 570px;
 	position: fixed;
 	width: 70%;
@@ -47,21 +47,22 @@ h1, #perfil{
 #timeline{
 	background: #e6e6e6;
 	overflow: scroll;
-	top: 40px;
+	/*top: 40px;*/
 	max-height: 570px;
 	width: 30%;
 	z-index: 0;
 }
 
 .menuUser{
-	background: rgba(3,3,3,0.8);
+	/*background: red;*/
+	background: #333;
 	display: none;
 	float: right;
 	padding-bottom: 0.5em;
 	padding-top: 0.5em;
 	position: absolute;
 	text-align: center;
-	top: 3em;
+	/*top: 3em;*/
 	width: 126px;
 	z-index: 1;
 }

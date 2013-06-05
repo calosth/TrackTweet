@@ -39,7 +39,7 @@
 						<a href="https://twitter.com/{{ tweet.user.screen_name }}" target='_black'>@{{ tweet.user.screen_name }}</a>
 						<attr class='timeago' title='{{ tweet.created_at }}'> {{ tweet.created_at }} </attr>
 						<br/>
-						{{ tweet.text | urlize }}
+						{{ tweet.text  }}
 					</p>
 				</article>
 			{% endfor %}
