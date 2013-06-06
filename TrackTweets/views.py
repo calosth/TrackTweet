@@ -11,7 +11,7 @@ import json
 oauth_token = ''
 oauth_token_secret =''
 ultimo_id = ''
- 
+max_id = 342735179267317761;
 def home(request):
 	# Si ha iniciado sesion
 	if 'oauth_token' in request.session:
@@ -122,7 +122,19 @@ def search(request):
 		return render(request,'search.html', {'form': form, 'profile_photo':profile_photo ,'user':user},context_instance=RequestContext(request))
 
 	else:
-		return render_to_response('index.html',context_instance=RequestContext(request))		
+		return render_to_response('index.html',context_instance=RequestContext(request))	
+
+def timelineback(request):
+
+	if request.is_ajax():
+		twitter 	= Twython( KeySecretApp.app_key, KeySecretApp.app_secret, request.session["oauth_token"], request.session["oauth_token_secret"] )
+		home_timeline_back = twitter.get_home_timeline( max_id = max_id , count = 10 )
+
+		return HttpResponse(
+			json.dumps({'timeline': home_timeline_back}),
+			content_type = 'application/json; charset=utf8')
+
+	return HttpResponseRedirect('/')
 
 def logout(request):
 	try:

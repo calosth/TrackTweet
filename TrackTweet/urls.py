@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     url(r'^search/(?P<search>\w+)', 'TrackTweets.views.search', name='search'),
     url(r'^get_tweets$', 'TrackTweets.views.get_tweets', name='get_tweets'),
     url(r'^logout$', 'TrackTweets.views.logout', name='logout'),
+    url(r'^timelineback$', 'TrackTweets.views.timelineback', name='timelineback'),
 
     # url(r'^TrackTweet/', include('TrackTweet.foo.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:

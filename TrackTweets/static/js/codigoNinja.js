@@ -117,6 +117,7 @@ function onDocumentReady() {
 
 	function inyectarTweets(key,tweet){
 
+			console.log(tweet);
 
 			var article ='';			
 
@@ -141,7 +142,12 @@ function onDocumentReady() {
 					tweet.text+"</p></article>";	
 
 			//inyectar tweet
-			$( '#tweets' ).prepend(html).css({display: 'block'});
+			if (tipo = 'arriba'){
+				$( '#tweets' ).prepend(html).css({display: 'block'});
+			}
+			else{
+				$( '#tweets' ).append(html).css({display: 'block'});
+			}
 
 			//deshabilitar #newTweets
 			$( '#newTweets' ).off( 'click' );
@@ -174,6 +180,80 @@ function onDocumentReady() {
 		});
 
 	}
+
+// -------------------------------------------------------------------------------------------//
+	$('#mastweet').on('click', handlerMastweet);
+
+	function handlerMastweet(){
+		URL = document.URL + 'timelineback';
+		$.getJSON( URL , manejarRequest_timelikeback );
+	}
+
+	function manejarRequest_timelikeback(json){
+		$.each(json,iterarRequest_timelineback);
+	}
+
+	function iterarRequest_timelineback( key , tweets ){
+	
+		$.each(tweets,inyectartimelineback)
+
+	}
+
+	function inyectartimelineback(key,tweet){
+
+		var article ='';			
+
+		//Si tiene localizacion
+		if (tweet.geo != null){
+			//Cadena para inyetar tweet
+			article = '<article class="tweet-geo" data-id= '+ tweet.id +'>';
+
+			tweet.coordinates.coordinates[0]; // Longitud
+			tweet.coordinates.coordinates[1]; // Latitude
+			//La verdad es que no se cual es cual
+			MarcarTweet( tweet.coordinates.coordinates[1], tweet.coordinates.coordinates[0] , tweet.user.screen_name , tweet.text, parseInt(tweet.id) );
+		}
+		else{
+			article = '<article class="tweet">';
+		}
+
+		var html = article +
+			"<a href='https://twitter.com/'"+ tweet.user.screem_name +"'><img src=" + tweet.user.profile_image_url +  " /></a><p><strong>"+
+				tweet.user.name+"</strong><a href='https://twitter.com/"+tweet.user.screen_name+"'> @"+ tweet.user.screen_name +"</a><attr class='timeago' title='" + tweet.created_at + "'>" + tweet.created_at + "</attr>"+
+				"<br/>" +
+				tweet.text+"</p></article>";	
+
+		//inyectar tweet			
+		$( '#tweets' ).append(html).css({display: 'block'});	
+
+		$( '.tweet-geo' ).on( 'click' , MoveraMarker );
+		$( 'attr.timeago' ).timeago();
+	}
+
+// -------------------------------------------------------------------------------------------//
+
+// http://i.imgur.com/qkKy8.gif
+	$('#timeline').infinitescroll({
+	    loading: {
+	        finished: undefined,
+	        finishedMsg: "<em>Congratulations, you've reached the end of the internet.</em>",
+	        img: 'http://i.imgur.com/qkKy8.gif',
+	        msg: null,
+	        msgText: "<em>Loading the next set of posts...</em>",
+	        selector: null,
+	        speed: 'fast',
+	        start: undefined
+	    },
+
+		// other options
+		dataType: 'json',
+		appendCallback: false
+	}, function(json, opts) {
+	// Get current page
+	var page = opts.state.currPage; 
+	console.log(page);
+	// Do something with JSON data, create DOM elements, etc ..
+	});	
 
 }
 

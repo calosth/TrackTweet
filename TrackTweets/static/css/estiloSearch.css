@@ -105,6 +105,11 @@ body {
 	#blockmensajeSearch, #blockmensajeGeo{	
 		width: 90%;
 	}
+
+	#buscar{
+		margin-top: 3em;
+		margin-bottom: 6em;
+	}
 	#buscar #formulario{
 		padding-left: 1.5em;
 		padding-right: 1.5em;
