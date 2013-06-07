@@ -128,17 +128,17 @@ def search(request):
 
 def timelineback(request):
 
-	# if request.is_ajax():
-	twitter 	= Twython( KeySecretApp.app_key, KeySecretApp.app_secret, request.session["oauth_token"], request.session["oauth_token_secret"] )
-	home_timeline_back = twitter.get_home_timeline( max_id = request.session['max_id'] , count = 10 )
-	request.session['max_id'] =  home_timeline_back[len( home_timeline_back ) -1]['id']  
+	if request.is_ajax():
+		twitter 	= Twython( KeySecretApp.app_key, KeySecretApp.app_secret, request.session["oauth_token"], request.session["oauth_token_secret"] )
+		home_timeline_back = twitter.get_home_timeline( max_id = request.session['max_id'] , count = 10 )
+		request.session['max_id'] =  home_timeline_back[ len( home_timeline_back ) -1 ]['id']  
 
-	#elimino la primera
-	del home_timeline_back[0]
-	
-	return HttpResponse(
-		json.dumps({'timeline': home_timeline_back}),
-		content_type = 'application/json; charset=utf8')
+		#elimino la primera
+		del home_timeline_back[0]
+
+		return HttpResponse(
+			json.dumps({'timeline': home_timeline_back}),
+			content_type = 'application/json; charset=utf8')
 
 	return HttpResponseRedirect('/')
 

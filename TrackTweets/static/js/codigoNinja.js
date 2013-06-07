@@ -182,11 +182,12 @@ function onDocumentReady() {
 	}
 
 // -------------------------------------------------------------------------------------------//
-	$('#mastweet').on('click', handlerMastweet);
 
 	function handlerMastweet(){
+		$('div#backtimelineLoader').html("<img src='http://i.imgur.com/qkKy8.gif'/><spam style='display:block;''>Cargando...</spam>");
 		URL = document.URL + 'timelineback';
 		$.getJSON( URL , manejarRequest_timelikeback );
+		
 	}
 
 	function manejarRequest_timelikeback(json){
@@ -228,22 +229,25 @@ function onDocumentReady() {
 
 		$( '.tweet-geo' ).on( 'click' , MoveraMarker );
 		$( 'attr.timeago' ).timeago();
+		$('div#backtimelineLoader').empty();
 	}
 
 // -------------------------------------------------------------------------------------------//
-
+// document height600 codigoNinja.js:238
+// scrollTopnull codigoNinja.js:239
+//  height timeline376 
 // http://i.imgur.com/qkKy8.gif
-	$('#timeline').infinitescroll({
-	  // other options
-	  dataType: 'json',
-	  appendCallback: false
-	}, function(json, opts) {
-	  // Get current page
-	  var page = opts.state.currPage; 
-	  andlerMastweet();
-	  // Do something with JSON data, create DOM elements, etc ..
-	});
+	$('#timeline').scroll(function()
+	{
 
+
+		var wintop = $('#timeline').scrollTop(), docheight = $('#tweets').height(), winheight = $('#timeline').height();
+        var  scrolltrigger = 0.99;
+
+        if((wintop/(docheight-winheight)) > scrolltrigger) {
+         	handlerMastweet();
+        }
+	});
 }
 
 
