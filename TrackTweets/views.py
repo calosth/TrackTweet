@@ -11,7 +11,7 @@ import json
 oauth_token = ''
 oauth_token_secret =''
 ultimo_id = ''
-max_id = 342735179267317761;
+
 def home(request):
 	# Si ha iniciado sesion
 	if 'oauth_token' in request.session:
@@ -22,7 +22,9 @@ def home(request):
 		request.session["profile_photo"] = JSONuser['profile_image_url_https']
 		profile_photo = request.session["profile_photo"]
  		home_timeline = twitter.get_home_timeline()
- 		request.session['ultimo_id'] = int (home_timeline[0]['id'] -4)
+
+ 		request.session['max_id']		=  home_timeline[ len( home_timeline ) -1 ]['id']
+ 		request.session['ultimo_id'] 	= int ( home_timeline[0]['id'] - 4 )
 		return render_to_response('home.html',{'tweets':home_timeline , 'profile_photo':profile_photo ,'user':user}, context_instance=RequestContext(request))
 	else:
 		return render_to_response('index.html',context_instance=RequestContext(request))
@@ -126,13 +128,17 @@ def search(request):
 
 def timelineback(request):
 
-	if request.is_ajax():
-		twitter 	= Twython( KeySecretApp.app_key, KeySecretApp.app_secret, request.session["oauth_token"], request.session["oauth_token_secret"] )
-		home_timeline_back = twitter.get_home_timeline( max_id = max_id , count = 10 )
+	# if request.is_ajax():
+	twitter 	= Twython( KeySecretApp.app_key, KeySecretApp.app_secret, request.session["oauth_token"], request.session["oauth_token_secret"] )
+	home_timeline_back = twitter.get_home_timeline( max_id = request.session['max_id'] , count = 10 )
+	request.session['max_id'] =  home_timeline_back[len( home_timeline_back ) -1]['id']  
 
-		return HttpResponse(
-			json.dumps({'timeline': home_timeline_back}),
-			content_type = 'application/json; charset=utf8')
+	#elimino la primera
+	del home_timeline_back[0]
+	
+	return HttpResponse(
+		json.dumps({'timeline': home_timeline_back}),
+		content_type = 'application/json; charset=utf8')
 
 	return HttpResponseRedirect('/')
 

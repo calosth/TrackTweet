@@ -234,26 +234,15 @@ function onDocumentReady() {
 
 // http://i.imgur.com/qkKy8.gif
 	$('#timeline').infinitescroll({
-	    loading: {
-	        finished: undefined,
-	        finishedMsg: "<em>Congratulations, you've reached the end of the internet.</em>",
-	        img: 'http://i.imgur.com/qkKy8.gif',
-	        msg: null,
-	        msgText: "<em>Loading the next set of posts...</em>",
-	        selector: null,
-	        speed: 'fast',
-	        start: undefined
-	    },
-
-		// other options
-		dataType: 'json',
-		appendCallback: false
+	  // other options
+	  dataType: 'json',
+	  appendCallback: false
 	}, function(json, opts) {
-	// Get current page
-	var page = opts.state.currPage; 
-	console.log(page);
-	// Do something with JSON data, create DOM elements, etc ..
-	});	
+	  // Get current page
+	  var page = opts.state.currPage; 
+	  andlerMastweet();
+	  // Do something with JSON data, create DOM elements, etc ..
+	});
 
 }
 
