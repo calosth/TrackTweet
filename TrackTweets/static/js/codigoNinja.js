@@ -44,7 +44,6 @@ function onDocumentReady() {
 			map.addLayer( markerTweet );			      	
 	    });
 
-
 	}
 	
 	// Request cada 60 segundos
