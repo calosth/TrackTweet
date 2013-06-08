@@ -16,12 +16,12 @@ function onDocumentReady() {
 
 	// var tiles = L.tileLayer( 'http://{s}.tile.osm.org/{z}/{x}/{y}.png' );
 	// http://a.tiles.mapbox.com/v3/calosth.map-ec1yuqmu/page.html
-	var tiles = L.tileLayer( 'http://{s}.tiles.mapbox.com/v3/calosth.map-ec1yuqmu/{z}/{x}/{y}.png' );
+	var tiles = L.tileLayer( 'http://{s}.tile.osm.org/{z}/{x}/{y}.png' );
 
 	map.addLayer( tiles );
 
 	//Funcion que recibe un tweet y lo pone en el mapa
-	function MarcarTweet( longi , latit , author , tweet , id ){
+	function MarcarTweet( longi , latit , tweethtml ,id){
 
 		var markerTweet = L.marker( [longi, latit] );
 		var tweetmarker = {
@@ -29,17 +29,26 @@ function onDocumentReady() {
 			tweet: id
 		}
 
+	    var latlng = new google.maps.LatLng(longi,latit);
+	    var geocoder = new google.maps.Geocoder();
+
 		listaMarkers.push( tweetmarker );
-		
-		map.addLayer( markerTweet );
-		markerTweet.bindPopup( author + " <br/>" + tweet );
+
+	    geocoder.geocode({'latLng': latlng}, function(results, status) {
+	      	if (status == google.maps.GeocoderStatus.OK) {
+		        if ( results[1] ) {
+		        	tweethtml = tweethtml + '<strong>' + results[1].formatted_address + '</strong>';			        			        
+		        }
+	      	}
+			markerTweet.bindPopup( tweethtml , {minWidth: 380,maxWidth: 400} ).openPopup();
+			map.addLayer( markerTweet );			      	
+	    });
+
+
 	}
 	
 	// Request cada 60 segundos
 	setInterval( RequestAjax, 60000 );
-
-
-
 
 	// Geoposicionar Tweets sincronos 
 	$( '.tweet-geo' ).each( posicionarTweetsPrimerRequest) ;
@@ -63,7 +72,8 @@ function onDocumentReady() {
 			}				
 			longitud += datos[i];
 		}
-		MarcarTweet( parseInt( latitud ), parseInt( longitud ), $(this).text() , '' , parseInt( $(this).data('id') ) );		
+		var html = $("<div />").append($(this).clone()).html();
+		MarcarTweet( parseFloat( latitud ), parseFloat( longitud ),  html  , parseInt( $(this).data('id')) );		
 
 	}
 
@@ -117,8 +127,6 @@ function onDocumentReady() {
 
 	function inyectarTweets(key,tweet){
 
-			console.log(tweet);
-
 			var article ='';			
 
 			//Si tiene localizacion
@@ -126,10 +134,6 @@ function onDocumentReady() {
 				//Cadena para inyetar tweet
 				article = '<article class="tweet-geo" data-id= '+ tweet.id +'>';
 
-				tweet.coordinates.coordinates[0]; // Longitud
-				tweet.coordinates.coordinates[1]; // Latitude
-				//La verdad es que no se cual es cual
-				MarcarTweet( tweet.coordinates.coordinates[1], tweet.coordinates.coordinates[0] , tweet.user.screen_name , tweet.text, parseInt(tweet.id) );
 			}
 			else{
 				article = '<article class="tweet">';
@@ -141,13 +145,16 @@ function onDocumentReady() {
 					"<br/>" +
 					tweet.text+"</p></article>";	
 
+			if(tweet.geo != null){
+				tweet.coordinates.coordinates[0]; // Longitud
+				tweet.coordinates.coordinates[1]; // Latitude
+				//La verdad es que no se cual es cual
+				MarcarTweet( tweet.coordinates.coordinates[1], tweet.coordinates.coordinates[0] ,  html, tweet.id );				
+			}
+
 			//inyectar tweet
-			if (tipo = 'arriba'){
-				$( '#tweets' ).prepend(html).css({display: 'block'});
-			}
-			else{
-				$( '#tweets' ).append(html).css({display: 'block'});
-			}
+			$( '#tweets' ).prepend(html).css({display: 'block'});
+
 
 			//deshabilitar #newTweets
 			$( '#newTweets' ).off( 'click' );
@@ -182,7 +189,7 @@ function onDocumentReady() {
 	}
 
 // -------------------------------------------------------------------------------------------//
-
+	var oneRequest = true;
 	function handlerMastweet(){
 		$('div#backtimelineLoader').html("<img src='http://i.imgur.com/qkKy8.gif'/><spam style='display:block;''>Cargando...</spam>");
 		URL = document.URL + 'timelineback';
@@ -209,10 +216,6 @@ function onDocumentReady() {
 			//Cadena para inyetar tweet
 			article = '<article class="tweet-geo" data-id= '+ tweet.id +'>';
 
-			tweet.coordinates.coordinates[0]; // Longitud
-			tweet.coordinates.coordinates[1]; // Latitude
-			//La verdad es que no se cual es cual
-			MarcarTweet( tweet.coordinates.coordinates[1], tweet.coordinates.coordinates[0] , tweet.user.screen_name , tweet.text, parseInt(tweet.id) );
 		}
 		else{
 			article = '<article class="tweet">';
@@ -224,19 +227,25 @@ function onDocumentReady() {
 				"<br/>" +
 				tweet.text+"</p></article>";	
 
+		if (tweet.geo != null){
+			tweet.coordinates.coordinates[0]; // Longitud
+			tweet.coordinates.coordinates[1]; // Latitude
+			//La verdad es que no se cual es cual
+			MarcarTweet( tweet.coordinates.coordinates[1], tweet.coordinates.coordinates[0] , html,tweet.id );			
+		}
+
 		//inyectar tweet			
 		$( '#tweets' ).append(html).css({display: 'block'});	
 
 		$( '.tweet-geo' ).on( 'click' , MoveraMarker );
 		$( 'attr.timeago' ).timeago();
 		$('div#backtimelineLoader').empty();
+        oneRequest = true;
+
 	}
 
 // -------------------------------------------------------------------------------------------//
-// document height600 codigoNinja.js:238
-// scrollTopnull codigoNinja.js:239
-//  height timeline376 
-// http://i.imgur.com/qkKy8.gif
+
 	$('#timeline').scroll(function()
 	{
 
@@ -244,7 +253,9 @@ function onDocumentReady() {
 		var wintop = $('#timeline').scrollTop(), docheight = $('#tweets').height(), winheight = $('#timeline').height();
         var  scrolltrigger = 0.99;
 
-        if((wintop/(docheight-winheight)) > scrolltrigger) {
+        if((wintop/(docheight-winheight)) > scrolltrigger && oneRequest ) {
+        	// console.log('final');
+        	oneRequest = false;
          	handlerMastweet();
         }
 	});

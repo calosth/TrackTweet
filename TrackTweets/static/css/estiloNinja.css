@@ -43,6 +43,35 @@ h1, #perfil{
 	z-index: 0;
 }
 
+
+/*Estilo popup*/
+#map .tweet-geo
+{
+	background: #ffffff;
+	color: #404040;
+	font-size: 1.1em;
+	letter-spacing: 0px;	
+}
+.leaflet-popup-content-wrapper .tweet-geo img , .leaflet-popup-content-wrapper .tweet-geo p
+{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.leaflet-popup-content-wrapper .tweet-geo p{
+	margin: 0;
+	margin-left: 1em;
+	width: 70%;
+}
+.leaflet-popup-content-wrapper .tweet-geo img{
+	border-radius: 3px;
+	width: 4em;
+}
+.leaflet-popup-content{
+	margin: 0;
+	width: 340px;
+}
+/**/
 #map , #timeline{
 	display: inline-block;
 	vertical-align: top;
@@ -217,7 +246,7 @@ h1, #perfil{
 	transition: all 0.4s linear;
 
 }
-.tweet-geo
+#timeline .tweet-geo
 {
 	background:  url('images/MiniMarker.png') no-repeat right 10% top 15% ,#ffffff;
 	border-radius: 0.3em;
@@ -260,30 +289,30 @@ h1, #perfil{
 	text-decoration: none;
 }
 
-.tweet-geo:hover
+#timeline .tweet-geo:hover
 {
 	background: url('images/MiniMarker.png') no-repeat right 10% top 15%,#b6b6b6;
 }
-.tweet-geo img{
+#timeline .tweet-geo img{
 	width: 3.8em;
 	border-radius: 0.2em;
 }
 
-.tweet-geo p{
+#timeline .tweet-geo p{
 	margin: 0 0 0 0.4em;
 	width: 82%;
 }
-.tweet-geo img , .tweet-geo p
+#timeline .tweet-geo img , #timeline  .tweet-geo p 
 {
 	display: inline-block;
 	vertical-align: top;
 }
-.tweet-geo a
+#timeline .tweet-geo a
 {
 	color: #336699;
 	text-decoration: none;
 }
-.tweet-geo a:hover
+#timeline .tweet-geo a:hover
 {
 	text-decoration: none;
 }
@@ -337,6 +366,5 @@ h1, #perfil{
 
 
 }
-
 
 

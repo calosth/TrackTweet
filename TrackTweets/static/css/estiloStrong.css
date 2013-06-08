@@ -1,9 +1,9 @@
 
-#index
+body
 {
 	background: white;
 	background: url('images/background.jpg') repeat center center;
-	min-height: 569px;
+	height: 100%;
 }
 section a
 {
