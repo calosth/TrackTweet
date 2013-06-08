@@ -1,3 +1,4 @@
+
 #backtimelineLoader {
 	text-align: center;
 	width: 100%;
@@ -67,10 +68,13 @@ h1, #perfil{
 	border-radius: 3px;
 	width: 4em;
 }
-.leaflet-popup-content{
-	margin: 0;
-	width: 340px;
+
+#address{
+	text-align: center;
+	color: #000;
+	font-size: 1.2em;
 }
+
 /**/
 #map , #timeline{
 	display: inline-block;

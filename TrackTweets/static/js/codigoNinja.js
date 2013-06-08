@@ -37,7 +37,7 @@ function onDocumentReady() {
 	    geocoder.geocode({'latLng': latlng}, function(results, status) {
 	      	if (status == google.maps.GeocoderStatus.OK) {
 		        if ( results[1] ) {
-		        	tweethtml = tweethtml + '<strong>' + results[1].formatted_address + '</strong>';			        			        
+		        	tweethtml = tweethtml + '<div id="address"><strong>' + results[1].formatted_address + '</strong></div>';			        			        
 		        }
 	      	}
 			markerTweet.bindPopup( tweethtml , {minWidth: 380,maxWidth: 400} ).openPopup();
