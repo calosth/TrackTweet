@@ -165,7 +165,7 @@ LOGGING = {
 
 
 
-# # Configuracion con Heruku
+# Configuracion con Heruku
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
 

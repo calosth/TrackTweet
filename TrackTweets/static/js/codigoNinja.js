@@ -23,18 +23,29 @@ function onDocumentReady() {
 	//Funcion que recibe un tweet y lo pone en el mapa
 	function MarcarTweet( longi , latit , tweethtml ,id){
 
-		var markerTweet = L.marker( [longi, latit] );
+		var tweetIcon = L.icon({
+			iconUrl: 'static/img/marker.png',
+			shadowUrl: 'static/img/marker-shadow.png',
+			iconSize: [25, 41],
+			shadowSize: [41,41],
+			iconAnchor: [12,40],
+			shadowAnchor: [13,40],
+			popupAnchor: [1,-30]
+
+		});
+		var markerTweet = L.marker( [longi, latit],{icon: tweetIcon} );
 		var tweetmarker = {
 			marker: markerTweet,
 			tweet: id
 		}
+
 
 	    var latlng = new google.maps.LatLng(longi,latit);
 	    var geocoder = new google.maps.Geocoder();
 
 		listaMarkers.push( tweetmarker );
 
-	    geocoder.geocode({'latLng': latlng}, function(results, status) {
+	    geocoder.geocode({'latLng': latlng, region: 'es'}, function(results, status) {
 	      	if (status == google.maps.GeocoderStatus.OK) {
 		        if ( results[1] ) {
 		        	tweethtml = tweethtml + '<div id="address"><strong>' + results[1].formatted_address + '</strong></div>';			        			        
@@ -179,7 +190,7 @@ function onDocumentReady() {
 			if ( this.tweet == IdClick ){
 
 				map.panTo( this.marker._latlng );
-				map.setZoom( 7 );
+				map.setZoom( 12 );
 				this.marker.openPopup();
 
 			}
@@ -190,7 +201,7 @@ function onDocumentReady() {
 // -------------------------------------------------------------------------------------------//
 	var oneRequest = true;
 	function handlerMastweet(){
-		$('div#backtimelineLoader').html("<img src='http://i.imgur.com/qkKy8.gif'/><spam style='display:block;''>Cargando...</spam>");
+		$('div#backtimelineLoader').html("<img src='http://i.imgur.com/qkKy8.gif'/><spam style='display:block;''>Cargando</spam>");
 		URL = document.URL + 'timelineback';
 		$.getJSON( URL , manejarRequest_timelikeback );
 		
