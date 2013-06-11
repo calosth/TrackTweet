@@ -36,7 +36,7 @@ h1, #perfil{
 	height: 100%;
 }
 #map {
-	height: 100%;
+	height: 93%;
 	position: absolute;
 	right: 0;	
 	top: 4em;
@@ -83,7 +83,7 @@ h1, #perfil{
 
 #timeline{
 	background: #e6e6e6;
-	height: 100%;
+	height: 93%;
 	overflow: scroll;
 	position: absolute;
 	width: 30%;
@@ -184,7 +184,9 @@ h1, #perfil{
 #perfil
 {
 	font-size: 1em;	
-	float: right;
+	position: absolute;
+	top: 0;
+	right: 0;
 }
 
 #perfil ul{
@@ -349,6 +351,11 @@ h1, #perfil{
 		padding: 0;
 		width: 48px;
 	}
+
+	#map , #timeline{
+		height: 100%;
+	}
+
 	#menu-display{
 		
 		height: auto;

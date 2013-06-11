@@ -1,12 +1,13 @@
 
 body
 {
-	background: white;
 	background: url('images/background.jpg') repeat center center;
 	height: 100%;
 }
+
 section a
 {
+
 	text-decoration: none;
 }
 #mensaje
@@ -35,10 +36,73 @@ section a
 	padding: 0.5em	;
 	width: 13em;
 }
+
+#blockmensajeSearch{
+	background: url('images/search-icon100x100.png') no-repeat  left top ;
+	background-size: 60px 60px;
+	width: 49%;
+
+}
+
+#blockmensajeSearch, #blockmensajeGeo{
+	vertical-align: top;
+	display: inline-block;
+	color: white;
+	margin: auto;
+	letter-spacing: 0.2em;
+	
+}
+
+
+#blockmensajeGeo{
+	background: url('images/marker-icon100x100.png') no-repeat  left top ;	
+	background-size: 60px 60px;
+	width: 50%;
+
+}
+
+#blockmensajeSearch h3, #blockmensajeGeo h3{
+	font-size: 1.4em;
+	font-weight: normal;
+	margin-top: 0;
+	margin-left: 3em;
+
+}
+
+#speech{
+	background: rgba(0,0,0,0.4);
+	border-radius: 0.4em;
+	padding: 0.8em;
+	margin: 4em 13em;
+}
+
+@media screen and (max-width: 940px){
+
+	#blockmensajeSearch, #blockmensajeGeo{
+		display: block;
+		height: 100%;
+		margin-top: 1em;
+		width: 100%;
+	}
+}
+
 @media screen and (max-width: 764px){
+
+	#blockmensajeSearch, #blockmensajeGeo{
+		height: 5em;
+	}
+
 	#mensaje h2
 	{
 		font-size: 2.5em;
+	}
+
+	#speech{
+		font-size: 0.9em;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 1em;
+		width: 90%;
 	}
 
 }

@@ -3,11 +3,27 @@ body
 	background: #fcfcfc;
 }
 section{
-	letter-spacing: 0.1em;	
+	letter-spacing: 2px;	
 	margin: 3em auto;
-	width: 80%;
+	width: 90%;
 }
 section a{
 	color: #1a90d4;
 	text-decoration: underline;
+}
+
+section p {
+	text-align: justify;
+	width: 40%;
+}
+
+.speech	{
+	text-decoration: none;
+	width: 59%;
+}
+
+
+section p , .speech{
+	vertical-align: top;
+	display: inline-block;
 }

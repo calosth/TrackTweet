@@ -2,19 +2,31 @@
 	
 	{% block links %}
 		<link rel="stylesheet" href='{{ STATIC_URL }}css/estiloStrong.css'>
+		<script src='{{ STATIC_URL }}js/jquery.min.js'></script>
+		<script src='{{ STATIC_URL }}js/jquery.hoverIntent.js'></script>			
+		<script src='{{ STATIC_URL }}js/main.js'></script>
+
 	{% endblock %}
 
 	{% block contenido %}
 		<section id='index'>
 			<div id='mensaje'>
 				<h2>
-					Localiza todo tu TL de Twitter
+					Localiza todo tu TL de Twitter,
 					<br/>
-					Come Tostones
+					explora el mapa	
 				</h2>
 			</div>
 
 			<a href="/login"><div id="singin">Sign In</div></a>
 		</section>
+		<section id='speech'>
+			<div id='blockmensajeSearch'>
+				<h3>Realiza busquedas de hashtags y usuarios</h3>
+			</div>
+			<div id='blockmensajeGeo'>			
+				<h3>Mira en el mapa desde dónde se hicieron los tweets</h3>
+			</div>	
+		</section>	
 	{% endblock %}
 
