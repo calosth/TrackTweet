@@ -14,9 +14,14 @@ function handlerDocumentReady(){
 
 	$('#IconMenu-display').on('click',handlerClickMenu);
 
+
 }
 function handlerClickMenu (e) {
 
 	$('#menu-display').slideToggle('fast');
 
 }
+
+
+
+

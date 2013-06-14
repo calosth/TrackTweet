@@ -29,16 +29,18 @@
 						<li><a href="/">Inicio</a></li>
 						<li><a href="/about">Sobre el Proyecto</a></li>
 						<li><a href="/search">Buscar</a></li>
+						{# {% if 'oauth_token' in request.session %} #}
 						<li id="user">
-							<div >
-								<span>{{ user }}</span>
-								<img src='{{ profile_photo }}' />
-								<div class='menuUser'>
-									<a href="/logout">logout</a>
-								</div>	 
-								</div>					
+							<div >								
+									<span>{{ user }}</span>
+									<img src='{{ profile_photo }}' />
+									<div class='menuUser'>
+										<a href="/logout">logout</a>
+									</div>	 
+									</div>	
 							</div>
 						</li>
+						{# {%endif%}				 #}
 					</ul>
 				</nav>
 			</div>

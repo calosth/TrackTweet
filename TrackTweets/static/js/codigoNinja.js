@@ -153,7 +153,7 @@ function onDocumentReady() {
 				"<a href='https://twitter.com/'"+ tweet.user.screem_name +"'><img src=" + tweet.user.profile_image_url +  " /></a><p><strong>"+
 					tweet.user.name+"</strong><a href='https://twitter.com/"+tweet.user.screen_name+"'> @"+ tweet.user.screen_name +"</a><attr class='timeago' title='" + tweet.created_at + "'>" + tweet.created_at + "</attr>"+
 					"<br/>" +
-					tweet.text+"</p></article>";	
+					tweet.text.convertirURL().convertirUsuario().convertirHashtag()+"</p></article>";	
 
 			if(tweet.geo != null){
 				tweet.coordinates.coordinates[0]; // Longitud
@@ -203,7 +203,11 @@ function onDocumentReady() {
 	function handlerMastweet(){
 		$('div#backtimelineLoader').html("<img src='http://i.imgur.com/qkKy8.gif'/><spam style='display:block;''>Cargando</spam>");
 		URL = document.URL + 'timelineback';
-		$.getJSON( URL , manejarRequest_timelikeback );
+		$.getJSON( URL , manejarRequest_timelikeback ).fail(function()
+			{
+				oneRequest = true;
+				$('div#backtimelineLoader').html("<img src='http://i.imgur.com/qkKy8.gif'/><spam style='display:block;''>Intenta mas tarde</spam>");
+			});
 		
 	}
 
@@ -235,7 +239,7 @@ function onDocumentReady() {
 			"<a href='https://twitter.com/'"+ tweet.user.screem_name +"'><img src=" + tweet.user.profile_image_url +  " /></a><p><strong>"+
 				tweet.user.name+"</strong><a href='https://twitter.com/"+tweet.user.screen_name+"'> @"+ tweet.user.screen_name +"</a><attr class='timeago' title='" + tweet.created_at + "'>" + tweet.created_at + "</attr>"+
 				"<br/>" +
-				tweet.text+"</p></article>";	
+				tweet.text.convertirURL().convertirUsuario().convertirHashtag()+"</p></article>";	
 
 		if (tweet.geo != null){
 			tweet.coordinates.coordinates[0]; // Longitud
@@ -264,7 +268,6 @@ function onDocumentReady() {
         var  scrolltrigger = 0.99;
 
         if((wintop/(docheight-winheight)) > scrolltrigger && oneRequest ) {
-        	// console.log('final');
         	oneRequest = false;
          	handlerMastweet();
         }
@@ -290,5 +293,27 @@ $.timeago.settings.strings = {
    months: "%d meses",
    year: "un año",
    years: "%d años"
+};
+
+String.prototype.convertirUsuario = function() {
+    return this.replace(/[@]+[A-Za-z0-9-_]+/g, function(u) {
+        var usuario = u.replace("@","");
+        return u.link("http://twitter.com/"+usuario);
+    });
+};
+
+String.prototype.convertirHashtag = function() {
+    return this.replace(/[#]+[A-Za-z0-9-_]+/g, function(e) {
+        var etiqueta = e.replace("#","%23");
+        return e.link("http://tracktweet.herokuapp.com/search?search="+etiqueta);
+    });
+};
+
+String.prototype.convertirURL = function() {
+    return this.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g, function(url) {
+    	nameurl = url.replace('http://','');
+    	url = '<a href="'+url+'" target="_black">' + nameurl + '</a>'
+        return url;
+    });
 };
 

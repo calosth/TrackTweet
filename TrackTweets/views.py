@@ -6,8 +6,8 @@ from TrackTweets.forms import searchForm
 from twython import Twython, TwythonError
 
 import KeySecretApp
+import TransformarTweet
 import json
-
 oauth_token = ''
 oauth_token_secret =''
 ultimo_id = ''
@@ -23,6 +23,9 @@ def home(request):
 		profile_photo = request.session["profile_photo"]
  		home_timeline = twitter.get_home_timeline()
 
+ 		for item in home_timeline:
+ 			item['text'] = TransformarTweet.convertirTweet(item['text'])
+
  		request.session['max_id']		=  home_timeline[ len( home_timeline ) -1 ]['id']
  		request.session['ultimo_id'] 	= int ( home_timeline[0]['id'] - 4 )
 		return render_to_response('home.html',{'tweets':home_timeline , 'profile_photo':profile_photo ,'user':user}, context_instance=RequestContext(request))
@@ -33,7 +36,7 @@ def home(request):
 def twitter(request):
 
 	twitter 			= Twython( KeySecretApp.app_key, KeySecretApp.app_secret )
-	auth_props 			= twitter.get_authentication_tokens( callback_url='http://tracktweet.herokuapp.com/done' )
+	auth_props 			= twitter.get_authentication_tokens( callback_url='http://localhost:8000/done' )
 	oauth_token 		= auth_props['oauth_token']
 	oauth_token_secret 	= auth_props['oauth_token_secret']
 
@@ -117,6 +120,8 @@ def search(request):
 			else:
  				search = twitter.search( q=palabra, count = 50 , result_type = 'recent' )
 				search = search['statuses']
+		 		for item in search:
+		 			item['text'] = TransformarTweet.convertirTweet(item['text'])					
 		 		request.session['ultimo_id'] = int (search[0]['id'] -4)
 				return render_to_response( 'homeSearch.html', {'tweets':search,'profile_photo':profile_photo ,'user':user,'busqueda':palabra }, context_instance=RequestContext(request))		
 		else:
@@ -149,6 +154,9 @@ def logout(request):
 	except KeyError:
 		pass
 	return HttpResponseRedirect('/')
+
+
+
 
 
 	
