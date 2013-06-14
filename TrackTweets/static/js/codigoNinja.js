@@ -214,7 +214,7 @@ function onDocumentReady() {
 		$.getJSON( URL , manejarRequest_timelikeback ).fail(function()
 			{
 				oneRequest = true;
-				$('div#backtimelineLoader').html("<img src='http://i.imgur.com/qkKy8.gif'/><spam style='display:block;''>Intenta mas tarde</spam>");
+				$('div#backtimelineLoader').html("<img src='http://www.usabiketours.com/_Images/icon_face_sad_32.png'/><spam style='display:block;''>Intenta mas tarde</spam>");
 			});
 		
 	}
