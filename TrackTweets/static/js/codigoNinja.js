@@ -4,6 +4,9 @@ var listaMarkers = [];
 function onDocumentReady() {
 
 
+
+
+
 	// Inicializar pluging Jquery timeago
 	$( 'attr.timeago' ).timeago();
     
@@ -19,6 +22,11 @@ function onDocumentReady() {
 	var tiles = L.tileLayer( 'http://{s}.tile.osm.org/{z}/{x}/{y}.png' );
 
 	map.addLayer( tiles );
+
+	//Ocultar el side bar
+	handlersidebar();
+	
+
 
 	//Funcion que recibe un tweet y lo pone en el mapa
 	function MarcarTweet( longi , latit , tweethtml ,id){
@@ -274,6 +282,47 @@ function onDocumentReady() {
 	});
 }
 
+
+function handlersidebar(){
+
+	$('#timeline').hover(function(){
+
+		if (document.documentElement.clientWidth < 664){
+			css = {
+				'margin-left': '0em',
+				'-webkit-transition': 'all 0.4s linear',
+				'opacity': 1
+			};
+			$('#timeline').css(css);
+		}
+		else{
+			css = {
+				'margin-left': '0em',
+				'-webkit-transition': 'all 0.4s linear',
+				'opacity': 1
+			};
+			$('#timeline').css(css);			
+		}
+		}
+		,function(){
+		if (document.documentElement.clientWidth < 664){
+			css = {
+				'margin-left': '-20em',
+				'-webkit-transition': 'all 0.4s linear',
+				'opacity': 0.6
+			};
+			$('#timeline').css(css);
+		}
+		else{
+			css = {
+				'margin-left': '0em',
+				'-webkit-transition': 'all 0.4s linear',
+				'opacity': 1
+			};
+			$('#timeline').css(css);			
+		}		
+	});	
+}
 
 $(document).on('ready', onDocumentReady);
 

@@ -332,7 +332,35 @@ h1, #perfil{
 	color: #336699;
 }
 
+@media screen and (max-width: 1232px){
+	#timeline{
+		width: 40%
+	}
 
+	#map{
+		width: 60%;
+	}
+}
+
+@media screen and (max-width: 923px){
+	#timeline{
+		width: 50%
+	}
+
+	#map{
+		width: 50%;
+	}
+}
+
+@media screen and (max-width: 743px){
+	#timeline{
+		width: 60%
+	}
+
+	#map{
+		width: 40%;
+	}
+}
 
 @media screen and (max-width: 664px){
 
@@ -375,6 +403,16 @@ h1, #perfil{
 		width: 100%;
 	}
 
+	#timeline{
+		margin-left: -20em;
+		width: 380px;
+		opacity: 0.6;
+		z-index: 1;
+	}
+
+	#map{
+		width: 100%;
+	}
 
 }
 
