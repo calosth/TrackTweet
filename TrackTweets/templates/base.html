@@ -6,6 +6,7 @@
 		<title>TrackTweet {% block titulo %} {%endblock%}</title>
 		<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico">
 		<link rel="stylesheet" href= '{{ STATIC_URL }}css/normalize.css'>
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href='{{ STATIC_URL }}css/estiloNinja.css'>
 		{% block links %}	
 
@@ -29,18 +30,20 @@
 						<li><a href="/">Inicio</a></li>
 						<li><a href="/about">Sobre el Proyecto</a></li>
 						<li><a href="/search">Buscar</a></li>
-						{# {% if 'oauth_token' in request.session %} #}
-						<li id="user">
-							<div >								
-									<span>{{ user }}</span>
-									<img src='{{ profile_photo }}' />
-									<div class='menuUser'>
-										<a href="/logout">logout</a>
-									</div>	 
-									</div>	
-							</div>
-						</li>
-						{# {%endif%}				 #}
+
+						{% if user != '' %}
+							<li id="user">
+								<div >								
+										<span>{{ user }}</span>
+										<img src='{{ profile_photo }}' />
+										<div class='menuUser'>
+											<a href="/logout">logout</a>
+										</div>	 
+										</div>	
+								</div>
+							</li>
+						{%endif%}				
+
 					</ul>
 				</nav>
 			</div>
@@ -56,18 +59,18 @@
 						<li><a href="/">Inicio</a></li>
 						<li><a href="/about">Sobre el Proyecto</a></li>
 						<li><a href="/search">Buscar</a></li>
-
-						<li id="userMenu">
-							<div >
-								<img src='{{ profile_photo }}' />
-								<span>{{ user }}</span>
-									<div class='menuUser'>
-										<a href="/logout">logout</a>
-									</div>	 
-								</div>					
-							</div>
-						</li>						
-					
+						{% if user != '' %}
+							<li id="userMenu">
+								<div >
+									<img src='{{ profile_photo }}' />
+									<span>{{ user }}</span>
+										<div class='menuUser'>
+											<a href="/logout">logout</a>
+										</div>	 
+									</div>					
+								</div>
+							</li>		
+						{%endif%}										
 					</ul>
 				</nav>					
 			</div>

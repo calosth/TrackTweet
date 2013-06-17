@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
-
+	{%block titulo%}
+	/ {{ user }}
+	{%endblock%}
 	{% block links %}
 		<link rel="stylesheet" href='{{ STATIC_URL }}css/estiloSearch.css'>
 		<script src='{{ STATIC_URL }}js/jquery.min.js'></script>

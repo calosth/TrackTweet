@@ -16,7 +16,10 @@ def home(request):
 	# Si ha iniciado sesion
 	if 'oauth_token' in request.session:
 
-		twitter 	= Twython( KeySecretApp.app_key, KeySecretApp.app_secret, request.session["oauth_token"], request.session["oauth_token_secret"] )
+		try:
+			twitter 	= Twython( KeySecretApp.app_key, KeySecretApp.app_secret, request.session["oauth_token"], request.session["oauth_token_secret"] )
+		except Exception, e:
+			return render_to_response('error.html',context_instance=RequestContext(request))
 		user 		= request.session["user"]
 		JSONuser 	= twitter.show_user( screen_name = user )				
 		request.session["profile_photo"] = JSONuser['profile_image_url_https']
@@ -30,7 +33,7 @@ def home(request):
  		request.session['ultimo_id'] 	= int ( home_timeline[0]['id'] - 4 )
 		return render_to_response('home.html',{'tweets':home_timeline , 'profile_photo':profile_photo ,'user':user}, context_instance=RequestContext(request))
 	else:
-		return render_to_response('index.html',context_instance=RequestContext(request))
+		return render_to_response('index.html',{'user':''},context_instance=RequestContext(request))
 
 
 def twitter(request):
@@ -68,7 +71,7 @@ def about(request):
 		profile_photo 	= request.session["profile_photo"]
 		return render_to_response('about.html',{'user':user,'profile_photo':profile_photo},context_instance=RequestContext(request))
 	else:
-		return render_to_response('aboutAnonymous.html',context_instance=RequestContext(request))
+		return render_to_response('aboutAnonymous.html',{'user':''},context_instance=RequestContext(request))
 
 # Request Asincrono
 def get_tweets(request):
@@ -129,7 +132,7 @@ def search(request):
 		return render(request,'search.html', {'form': form, 'profile_photo':profile_photo ,'user':user},context_instance=RequestContext(request))
 
 	else:
-		return render_to_response('index.html',context_instance=RequestContext(request))	
+		return render_to_response('index.html',{'user':''},context_instance=RequestContext(request))	
 
 def timelineback(request):
 

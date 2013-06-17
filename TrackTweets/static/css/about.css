@@ -1,11 +1,21 @@
 body
 {
-	background: #fcfcfc;
+	background: #f5f5f5;
+}
+h2{
+	background: #333;
+	color: #f5f5f5;
+	font-weight: normal;
+	letter-spacing: 2px;		
+	margin: 0;
+	padding: 0.5em;
 }
 section{
-	letter-spacing: 2px;	
-	margin: 3em auto;
-	width: 90%;
+	background: white;
+	border-radius: 2px;
+	color: #343434;
+	letter-spacing: 1px;	
+	width: 100%;
 }
 section a{
 	color: #1a90d4;
@@ -13,18 +23,17 @@ section a{
 }
 
 section p {
+	margin: 1em;
+	padding: 1em;
+	line-height: 1.4em;
 	text-align: justify;
-	line-height: 1.6em;
-	width: 40%;
+	width: 90%;
 }
 
 .speech	{
+
 	text-decoration: none;
-	width: 59%;
+	width: 100%;
 }
 
 
-section p , .speech{
-	vertical-align: top;
-	display: inline-block;
-}

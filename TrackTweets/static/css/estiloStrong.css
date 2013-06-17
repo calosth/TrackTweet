@@ -27,13 +27,13 @@ section a
 #singin
 {
 	background-color: #0064aa;
-	box-shadow: #000 1 1 10px;
 	border-radius: 0.1em;
+	box-shadow: #000 1 1 10px;
 	color: #FFF;
-	text-align: center;
 	font-size: 1.5em;
 	margin: 5em 0 0 2em;
 	padding: 0.5em	;
+	text-align: center;
 	width: 13em;
 }
 
@@ -45,11 +45,11 @@ section a
 }
 
 #blockmensajeSearch, #blockmensajeGeo{
-	vertical-align: top;
-	display: inline-block;
 	color: white;
-	margin: auto;
+	display: inline-block;
 	letter-spacing: 0.2em;
+	margin: auto;
+	vertical-align: top;
 	
 }
 
@@ -64,16 +64,20 @@ section a
 #blockmensajeSearch h3, #blockmensajeGeo h3{
 	font-size: 1.4em;
 	font-weight: normal;
-	margin-top: 0;
 	margin-left: 3em;
+	margin-top: 0;
 
 }
 
 #speech{
 	background: rgba(0,0,0,0.4);
 	border-radius: 0.4em;
-	padding: 0.8em;
 	margin: 4em 13em;
+	padding: 0.8em;
+}
+
+#perfil{
+	top: 5px;
 }
 
 @media screen and (max-width: 940px){
