@@ -6,7 +6,6 @@ from TrackTweet import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
     url(r'^$', 'TrackTweets.views.home', name='home'),
     url(r'^login$', 'TrackTweets.views.twitter', name='twitter'),
     url(r'^done$', 'TrackTweets.views.done', name='done'),
@@ -20,13 +19,14 @@ urlpatterns = patterns('',
     # url(r'^TrackTweet/', include('TrackTweet.foo.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^app/TrackTweets/static/css/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    # url(r'^app/TrackTweets/static/css/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    # url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
 
 )
 
-if not settings.DEBUG:
-    urlpatterns += patterns('',
-        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-    )
+# if not settings.DEBUG:
+#     urlpatterns += patterns('',
+#         (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+#     )

@@ -1,14 +1,4 @@
-@font-face {
-    font-family: 'Muli';
-    src: url('/static/fonts/muli-regular-webfont.eot');
-    src: url('/static/fonts/muli-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/static/fonts/muli-regular-webfont.woff') format('woff'),
-         url('/static/fonts/muli-regular-webfont.ttf') format('truetype'),
-         url('/static/fonts/muli-regular-webfont.svg#muliregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
 
-}
 
 
 #backtimelineLoader {
@@ -144,8 +134,8 @@ h1, #perfil{
 	font-size: 0.8em;	
 }
 
-#menu-display #userMenu :hover{
-	-webkit-transition: all 0.1s linear;
+#menu-display #userMenu {
+	transition: all 0.1s linear;
 	color: #0fb9ff;
 	text-decoration: none;
 }
@@ -171,7 +161,7 @@ h1, #perfil{
 	margin: 0.5em;
 	padding: 0.7em;
 	text-align: center;
-	-webkit-transition: all 0.4s linear;
+	transition: all 0.4s linear;
 }
 
 #adduser {
@@ -213,7 +203,7 @@ h1, #perfil{
 {
 	color: #CCC;
 	text-decoration: none;
-	-webkit-transition: all 0.1s linear;
+	transition: all 0.1s linear;
 }
 #perfil ul li a:hover, #menu-display ul li a:hover
 {

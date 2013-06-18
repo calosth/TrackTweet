@@ -17,8 +17,6 @@ function onDocumentReady() {
 	    // maxZoom: 3,
 	});
 
-	// var tiles = L.tileLayer( 'http://{s}.tile.osm.org/{z}/{x}/{y}.png' );
-	// http://a.tiles.mapbox.com/v3/calosth.map-ec1yuqmu/page.html
 	var tiles = L.tileLayer( 'http://{s}.tile.osm.org/{z}/{x}/{y}.png' );
 
 	map.addLayer( tiles );
