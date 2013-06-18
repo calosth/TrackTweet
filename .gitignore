@@ -2,3 +2,5 @@ venv
 *.pyc
 .DS_Store
 dbrara
+TrackTweet/settings.py
+TrackTWeets/KeySecretApp.py
