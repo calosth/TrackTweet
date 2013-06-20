@@ -110,3 +110,23 @@ section a
 	}
 
 }
+
+
+@media screen and (max-width: 350px){
+	#mensaje h2
+	{
+		font-size: 1.9em;
+	}
+	#singin
+	{
+		background-color: #0064aa;
+		border-radius: 0.1em;
+		box-shadow: #000 1 1 10px;
+		color: #FFF;
+		font-size: 1.5em;
+		margin: 5em 0 0 2em;
+		padding: 0.5em	;
+		text-align: center;
+		width: 7em;
+	}
+}

@@ -53,7 +53,7 @@ def done(request):
 	oauth_tokens 			= twitter.get_authorized_tokens( oauth_verifier )
 	request.session["user"] = oauth_tokens['screen_name']
 
-	#Agregar usuario a la base de datos si no existe
+	# Agregar usuario a la base de datos si no existe
 	if User.objects.filter( username= request.session["user"] ) is None:
 		usuario = User.objects.create_user(request.session["user"])
 		usuario.save()
